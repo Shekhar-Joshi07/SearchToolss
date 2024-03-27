@@ -1,0 +1,43 @@
+{
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "pcatoolkit",
+    "version": "1.0.2024"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "open": true
+      }
+    },
+    "windows": [
+      {
+        "title": "PCA Toolkit v.1.0.2024",
+        "width": 800,
+        "height": 600,
+        "resizable": true,
+        "minWidth": 800,
+        "minHeight": 600
+      }
+    ],
+    "security": {
+      "csp": null
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.pcatoolkit.dev",
+      "icon": [
+        "icons/PCA.icns",
+        "icons/PCA.ico"
+      ]
+    }
+  }
+}
