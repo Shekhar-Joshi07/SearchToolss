@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Spinner } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import forestAbstract from "../assets/forest-abstract.jpg"
 import { SplitText } from "../components/NewComponents/SplitText";
 import About from "./About";
 import Index from "./Cases/Index";
@@ -140,19 +139,34 @@ import Case3 from "./Cases/Case3";
 import Case4 from "./Cases/Case4";
 import Case5 from "./Cases/Case5";
 import Case6 from "./Cases/Case6";
-
+import StickyNav from "../components/NewComponents/StickyNav";
+import Referrences from "../components/References";
+import { ImFilePdf } from "react-icons/im";
+import { Dropdown } from "react-bootstrap";
+import DropDownComponent from "../components/NewComponents/DropdownComponent";
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchTermCategory, setSearchTermCategory] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [showLoader, setShowLoader] = useState(false);
   const [isFromCategory, setIsFromCategory] = useState(false);
-  // const [resultFound, setResultFound]  =  useState(false);
 
-  const [toolNumber, setToolNumber] = useState();
+  const [toolNumber, setToolNumber] = useState(); //** */
   const [isClicked, setClicked] = useState(false);
   let [visible, setVisible] = useState(false);
   const [displayDiv, setDisplay] = useState("");
+  const [searchMenu, setSearchMenu] = useState("");
+  const [titleHeading, setTitleHeading] = useState("");
+
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const handleMouseEnter = () => {
+    setShowDropdown(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowDropdown(false);
+  };
 
   const displayData = (div) => {
     switch (div) {
@@ -164,12 +178,646 @@ const Home = () => {
         return <Contactus />;
       case "results":
         return showResults();
-
+      case "reference":
+        return <Referrences />;
       default: {
-        return showResults() || showDefault();
+        return showDefault();
       }
     }
   };
+
+  const filteredComponents = [
+    <Tool1
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"POLICY AND LEGAL FRAMEWORK"}
+      tNumber={setToolNumber}
+      menu={["Laws and regulations", "Resources and tourism"]}
+      cl={setClicked}
+    />,
+    <Tool2
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"POLICY AND LEGAL FRAMEWORK"}
+      tNumber={setToolNumber}
+      menu={[]}
+      cl={setClicked}
+    />,
+    <Tool3
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"SPATIAL PLANNING"}
+      tNumber={setToolNumber}
+      menu={[, "Resources and tourism", "Design site values"]}
+      cl={setClicked}
+    />,
+    <Tool4
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"SPATIAL PLANNING"}
+      tNumber={setToolNumber}
+      menu={[, "Ecological condition"]}
+      cl={setClicked}
+    />,
+    <Tool5
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"SPATIAL PLANNING"}
+      tNumber={setToolNumber}
+      menu={["Governance", "Laws and regulations", "Resources and tourism"]}
+      cl={setClicked}
+    />,
+    <Tool6
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"SPATIAL PLANNING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[]}
+    />,
+    <Tool7
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"SPATIAL PLANNING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Identify site values", "Threats"]}
+    />,
+    <Tool8
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"SPATIAL PLANNING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Threats", "Resources and tourism"]}
+    />,
+
+    <Tool9
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"SPATIAL PLANNING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Resources and tourism"]}
+    />,
+    <Tool10
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"SPATIAL PLANNING"}
+      tNumber={setToolNumber}
+      menu={[
+        "Ecological condition",
+        "Transparency and accountability",
+        "Threats",
+        "Cultural values",
+      ]}
+      cl={setClicked}
+    />,
+    <Tool11
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"SPATIAL PLANNING"}
+      tNumber={setToolNumber}
+      menu={["Design site values", "Conservation of values"]}
+      cl={setClicked}
+    />,
+    <Tool12
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"SPATIAL PLANNING"}
+      tNumber={setToolNumber}
+      menu={["Design site values", "Transparency and accountability"]}
+      cl={setClicked}
+    />,
+    <Tool13
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"SPATIAL PLANNING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Design site values", "Conservation of values"]}
+    />,
+    <Tool14
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"MANAGEMENT PLANNING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Management strategy",
+        "Threats",
+        "Design site values",
+        ,
+        "Resources and tourism",
+      ]}
+    />,
+    <Tool15
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"MANAGEMENT PLANNING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Management strategy",
+        "Design site values",
+        "Identify site values",
+      ]}
+    />,
+    <Tool16
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"MANAGEMENT PLANNING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Threats",
+        "Design site values",
+        "Identify site values",
+      ]}
+    />,
+    <Tool17
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"MANAGEMENT PLANNING"}
+      tNumber={setToolNumber}
+      menu={[
+        "Threats",
+        "Design site values",
+        "Transparency and accountability",
+      ]}
+      cl={setClicked}
+    />,
+    <Tool18
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"MANAGEMENT PLANNING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Management strategy",
+        "Design site values",
+        "Ecological condition",
+        ,
+        "Resources and tourism",
+        ,
+        "Ecosystem services",
+      ]}
+    />,
+    <Tool19
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"MANAGEMENT PLANNING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Identify site values",
+        "Design site values",
+
+        "Resources and tourism",
+        "Ecological condition",
+
+        "Conservation of values",
+      ]}
+    />,
+    <Tool20
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"MANAGEMENT PLANNING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Management strategy",
+        "Economic",
+        "Social and economic",
+
+        "Resources and tourism",
+      ]}
+    />,
+    <Tool21
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"PROTECTED AREA FINANCING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Measure Success"]}
+    />,
+    <Tool22
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"PROTECTED AREA FINANCING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Design site values",
+        "Laws and regulations",
+        "Resources and tourism",
+      ]}
+    />,
+    <Tool23
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"PROTECTED AREA FINANCING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Resources and tourism"]}
+    />,
+    <Tool24
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"PROTECTED AREA FINANCING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Social and economic",
+        "Resources and tourism",
+        "Ecosystem services",
+      ]}
+    />,
+    <Tool25
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"PROTECTED AREA FINANCING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Economic", "Resources and tourism"]}
+    />,
+    <Tool26
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"PROTECTED AREA FINANCING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Governance", "Design site values", "Resources and tourism"]}
+    />,
+    <Tool27
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"PROTECTED AREA FINANCING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Economic",
+        "Social and economic",
+        "Resources and tourism",
+        "Cultural values",
+        "Ecosystem services",
+      ]}
+    />,
+    <Tool28
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"PROTECTED AREA FINANCING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Design site values", "Ecological condition", "Measure Success"]}
+    />,
+    <Tool29
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"PROTECTED AREA FINANCING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[]}
+    />,
+    <Tool30
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"PROTECTED AREA FINANCING"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Resources and tourism"]}
+    />,
+    <Tool31
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"CAPACITY DEVELOPMENT"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Design site values", "Resources and tourism"]}
+    />,
+    <Tool32
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"CAPACITY DEVELOPMENT"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Management strategy", "Resources and tourism"]}
+    />,
+    <Tool33
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"ASSESSMENT, MONITORING AND EVALUATION"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[]}
+    />,
+    <Tool34
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"ASSESSMENT, MONITORING AND EVALUATION"}
+      tNumber={setToolNumber}
+      menu={[
+        "Governance",
+        "Management strategy",
+        "Threats",
+        "Transparency and accountability",
+        "Identify site values",
+        "Ecological condition",
+        "Conservation of values",
+      ]}
+      cl={setClicked}
+    />,
+    <Tool35
+      menu={[
+        "Governance",
+        "Management strategy",
+        "Threats",
+        "Ecological condition",
+      ]}
+      searchMenu={searchMenu}
+      searchTerm={searchTerm}
+      category={"ASSESSMENT, MONITORING AND EVALUATION"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+    />,
+    <Tool36
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"ASSESSMENT, MONITORING AND EVALUATION"}
+      tNumber={setToolNumber}
+      menu={[
+        "Governance",
+        "Management strategy",
+        "Design site values",
+        "Economic",
+        "Transparency and accountability",
+
+        "Social and economic",
+
+        "Laws and regulations",
+      ]}
+      cl={setClicked}
+    />,
+    <Tool37
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"ASSESSMENT, MONITORING AND EVALUATION"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Management strategy",
+        "Threats",
+        "Design site values",
+        "Identify site values",
+        "Cultural values",
+        "Conservation of values",
+      ]}
+    />,
+    <Tool38
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"ASSESSMENT, MONITORING AND EVALUATION"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Management strategy",
+        "Identify site values",
+        "Ecological condition",
+        "Laws and regulations",
+        "Ecosystem services",
+        "Measure Success",
+        "Resources and tourism",
+      ]}
+    />,
+    <Tool39
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"ASSESSMENT, MONITORING AND EVALUATION"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Design site values",
+        "Management strategy",
+        "Resources and tourism",
+      ]}
+    />,
+    <Tool40
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"ASSESSMENT, MONITORING AND EVALUATION"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Threats", "Resources and tourism", "Ecosystem services"]}
+    />,
+    <Tool41
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"ASSESSMENT, MONITORING AND EVALUATION"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Design site values",
+        "Laws and regulations",
+        "Measure Success",
+        "Resources and tourism",
+      ]}
+    />,
+    <Tool42
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"ASSESSMENT, MONITORING AND EVALUATION"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Identify site values",
+        "Economic",
+        "Social and economic",
+        "Resources and tourism",
+        "Conservation of values",
+        "Governance",
+        "Ecosystem services",
+      ]}
+    />,
+    <Tool43
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"ASSESSMENT, MONITORING AND EVALUATION"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Economic",
+        "Ecological condition",
+        "Social and economic",
+        "Resources and tourism",
+      ]}
+    />,
+    <Tool44
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"ASSESSMENT, MONITORING AND EVALUATION"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Identify site values", "Measure Success", "Ecosystem services"]}
+    />,
+    <Tool45
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"ASSESSMENT, MONITORING AND EVALUATION"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Identify site values",
+        "Design site values",
+        "Ecosystem services",
+        "Economic",
+        "Ecological condition",
+        "Social and economic",
+        "Resources and tourism",
+      ]}
+    />,
+    <Tool46
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"GOVERNANCE"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Governance", "Design site values", "Resources and tourism"]}
+    />,
+    <Tool47
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"GOVERNANCE"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Transparency and accountability",
+        "Resources and tourism",
+      ]}
+    />,
+    <Tool48
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"GOVERNANCE"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Economic",
+        "Management strategy",
+        "Social and economic",
+        "Resources and tourism",
+      ]}
+    />,
+    <Tool49
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"GOVERNANCE"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Governance", "Identify site values", "Design site values"]}
+    />,
+    <Tool50
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"GOVERNANCE"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Legitimacy",
+        "Governance",
+        "Transparency and accountability",
+        "Economic",
+        "Identify site values",
+        "Cultural values",
+        "Social and economic",
+        "Laws and regulations",
+      ]}
+    />,
+    <Tool51
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"GOVERNANCE"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Transparency and accountability",
+        "Identify site values",
+        "Cultural values",
+        "Laws and regulations",
+      ]}
+    />,
+    <Tool52
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"GOVERNANCE"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Threats",
+        "Identify site values",
+        "Management strategy",
+      ]}
+    />,
+    <Tool53
+      searchTerm={searchTerm}
+      category={"GOVERNANCE"}
+      searchMenu={searchMenu}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Design site values",
+        "Management strategy",
+        "Resources and tourism",
+      ]}
+    />,
+    <Tool54
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"GOVERNANCE"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Identify site values",
+        "Management strategy",
+        "Resources and tourism",
+        "Measure Success",
+      ]}
+    />,
+    <Tool55
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"GOVERNANCE"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={[
+        "Governance",
+        "Economic",
+        "Social and economic",
+        "Measure Success",
+      ]}
+    />,
+
+    <Tool56
+      searchTerm={searchTerm}
+      searchMenu={searchMenu}
+      category={"GOVERNANCE"}
+      tNumber={setToolNumber}
+      cl={setClicked}
+      menu={["Governance", "Measure Success"]}
+    />,
+  ];
 
   const handleSearch = () => {
     setSearchTerm((prev) => (prev = searchInput));
@@ -182,18 +830,18 @@ const Home = () => {
   const searchCategory = (categoryKeyword) => {
     setSearchTerm((prev) => (prev = categoryKeyword));
     setIsFromCategory(true);
-    setDisplay("results");
+    // setDisplay("results");
   };
 
   useEffect(() => {
-    if (searchTerm !== "") {
+    if (searchTerm !== "" || searchMenu !== "") {
       setShowLoader(true);
       setTimeout(() => {
         setShowLoader(false);
         console.log("stopped");
       }, 1000);
     }
-  }, [searchTerm]);
+  }, [searchTerm, searchMenu]);
 
   useEffect(() => {
     setVisible(!visible);
@@ -868,7 +1516,7 @@ const Home = () => {
         return (
           <>
             {resultHeading}
-            <h5>Toolkit result</h5>
+            <h5>Tools result</h5>
             {toolList.map((tool) => {
               return tool;
             })}
@@ -941,7 +1589,7 @@ const Home = () => {
     );
   };
 
-  const ShowTool = () => {
+  const ShowData = () => {
     switch (Number(toolNumber)) {
       case 1:
         return <Tooll1 />;
@@ -1069,351 +1717,27 @@ const Home = () => {
         return <Case6 />;
 
       default:
-        return filteredComponents.filter(
-          (component) => component.props.category === searchTerm
-        );
+        if (searchMenu) {
+          if (Array.isArray(searchMenu)) {
+            // If searchMenu is an array, filter based on multiple menu items
+            return filteredComponents.filter((item) => {
+              return searchMenu.some((search) =>
+                item.props.menu.includes(search)
+              );
+            });
+          } else {
+            // If searchMenu is a single string, filter based on that single menu item
+            return filteredComponents.filter((item) => {
+              return item.props.menu.includes(searchMenu);
+            });
+          }
+        } else if (searchCategory) {
+          return filteredComponents.filter(
+            (component) => component.props.category === searchTerm
+          );
+        }
     }
   };
-
-  const filteredComponents = [
-    <Tool1
-      searchTerm={searchTerm}
-      category={"POLICY AND LEGAL FRAMEWORK"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool2
-      searchTerm={searchTerm}
-      category={"POLICY AND LEGAL FRAMEWORK"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool3
-      searchTerm={searchTerm}
-      category={"SPATIAL PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool4
-      searchTerm={searchTerm}
-      category={"SPATIAL PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool5
-      searchTerm={searchTerm}
-      category={"SPATIAL PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool6
-      searchTerm={searchTerm}
-      category={"SPATIAL PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool7
-      searchTerm={searchTerm}
-      category={"SPATIAL PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool8
-      searchTerm={searchTerm}
-      category={"SPATIAL PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-
-    <Tool9
-      searchTerm={searchTerm}
-      category={"SPATIAL PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool10
-      searchTerm={searchTerm}
-      category={"SPATIAL PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool11
-      searchTerm={searchTerm}
-      category={"SPATIAL PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool12
-      searchTerm={searchTerm}
-      category={"SPATIAL PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool13
-      searchTerm={searchTerm}
-      category={"SPATIAL PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool14
-      searchTerm={searchTerm}
-      category={"MANAGEMENT PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool15
-      searchTerm={searchTerm}
-      category={"MANAGEMENT PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool16
-      searchTerm={searchTerm}
-      category={"MANAGEMENT PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool17
-      searchTerm={searchTerm}
-      category={"MANAGEMENT PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool18
-      searchTerm={searchTerm}
-      category={"MANAGEMENT PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool19
-      searchTerm={searchTerm}
-      category={"MANAGEMENT PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool20
-      searchTerm={searchTerm}
-      category={"MANAGEMENT PLANNING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool21
-      searchTerm={searchTerm}
-      category={"PROTECTED AREA FINANCING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool22
-      searchTerm={searchTerm}
-      category={"PROTECTED AREA FINANCING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool23
-      searchTerm={searchTerm}
-      category={"PROTECTED AREA FINANCING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool24
-      searchTerm={searchTerm}
-      category={"PROTECTED AREA FINANCING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool25
-      searchTerm={searchTerm}
-      category={"PROTECTED AREA FINANCING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool26
-      searchTerm={searchTerm}
-      category={"PROTECTED AREA FINANCING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool27
-      searchTerm={searchTerm}
-      category={"PROTECTED AREA FINANCING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool28
-      searchTerm={searchTerm}
-      category={"PROTECTED AREA FINANCING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool29
-      searchTerm={searchTerm}
-      category={"PROTECTED AREA FINANCING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool30
-      searchTerm={searchTerm}
-      category={"PROTECTED AREA FINANCING"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool31
-      searchTerm={searchTerm}
-      category={"CAPACITY DEVELOPMENT"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool32
-      searchTerm={searchTerm}
-      category={"CAPACITY DEVELOPMENT"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool33
-      searchTerm={searchTerm}
-      category={"ASSESSMENT, MONITORING AND EVALUATION"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool34
-      searchTerm={searchTerm}
-      category={"ASSESSMENT, MONITORING AND EVALUATION"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool35
-      searchTerm={searchTerm}
-      category={"ASSESSMENT, MONITORING AND EVALUATION"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool36
-      searchTerm={searchTerm}
-      category={"ASSESSMENT, MONITORING AND EVALUATION"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool37
-      searchTerm={searchTerm}
-      category={"ASSESSMENT, MONITORING AND EVALUATION"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool38
-      searchTerm={searchTerm}
-      category={"ASSESSMENT, MONITORING AND EVALUATION"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool39
-      searchTerm={searchTerm}
-      category={"ASSESSMENT, MONITORING AND EVALUATION"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool40
-      searchTerm={searchTerm}
-      category={"ASSESSMENT, MONITORING AND EVALUATION"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool41
-      searchTerm={searchTerm}
-      category={"ASSESSMENT, MONITORING AND EVALUATION"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool42
-      searchTerm={searchTerm}
-      category={"ASSESSMENT, MONITORING AND EVALUATION"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool43
-      searchTerm={searchTerm}
-      category={"ASSESSMENT, MONITORING AND EVALUATION"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool44
-      searchTerm={searchTerm}
-      category={"ASSESSMENT, MONITORING AND EVALUATION"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool45
-      searchTerm={searchTerm}
-      category={"ASSESSMENT, MONITORING AND EVALUATION"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool46
-      searchTerm={searchTerm}
-      category={"GOVERNANCE"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool47
-      searchTerm={searchTerm}
-      category={"GOVERNANCE"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool48
-      searchTerm={searchTerm}
-      category={"GOVERNANCE"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool49
-      searchTerm={searchTerm}
-      category={"GOVERNANCE"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool50
-      searchTerm={searchTerm}
-      category={"GOVERNANCE"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool51
-      searchTerm={searchTerm}
-      category={"GOVERNANCE"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool52
-      searchTerm={searchTerm}
-      category={"GOVERNANCE"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool53
-      searchTerm={searchTerm}
-      category={"GOVERNANCE"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool54
-      searchTerm={searchTerm}
-      category={"GOVERNANCE"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool55
-      searchTerm={searchTerm}
-      category={"GOVERNANCE"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-    <Tool56
-      searchTerm={searchTerm}
-      category={"GOVERNANCE"}
-      tNumber={setToolNumber}
-      cl={setClicked}
-    />,
-  ].filter((component) => component.props.category === searchTerm);
 
   const showResults = () => {
     if (showLoader) {
@@ -1426,16 +1750,71 @@ const Home = () => {
       if (isFromCategory && searchTerm) {
         return (
           <>
-            <Box textAlign="start" mt="-3" mb="4">
-              <span>Showing results from</span> &nbsp;
-              <span
-                style={{
-                  fontWeight: "600",
-                  color: "#5ae6b8",
-                }}
-              >{`${searchTerm}`}</span>
+            <Box
+              textAlign="start"
+              mt="-3"
+              mb="4"
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <div>
+                <span>Showing results from</span>&nbsp;
+                <span style={{ fontWeight: "600", color: "#5ae6b8" }}>
+                  {searchTerm}
+                </span>
+              </div>
+              {isClicked && (
+                <button
+                  className="btn backBtn"
+                  style={{ textAlign: "end" }}
+                  onClick={() => {
+                    setToolNumber("undefined");
+                    setClicked(false);
+                  }}
+                >
+                  Back
+                </button>
+              )}
             </Box>
-            <ShowTool />
+            <ShowData />
+          </>
+        );
+      } else if (isFromCategory && searchMenu) {
+        return (
+          <>
+            <Box
+              textAlign="start"
+              mt="-3"
+              mb="4"
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <div>
+                <span>Showing results from</span>&nbsp;
+                <span style={{ fontWeight: "600", color: "#5ae6b8" }}>
+                  {titleHeading ? titleHeading : searchMenu}
+                </span>
+              </div>
+              {isClicked && (
+                <button
+                  className="btn backBtn"
+                  style={{ textAlign: "end" }}
+                  onClick={() => {
+                    setToolNumber("undefined");
+                    setClicked(false);
+                  }}
+                >
+                  Back
+                </button>
+              )}
+            </Box>
+            <ShowData />
           </>
         );
       } else if (searchTerm && !isFromCategory) {
@@ -1482,6 +1861,7 @@ const Home = () => {
                             setDisplay("results");
                             searchCategory("POLICY AND LEGAL FRAMEWORK");
                             setToolNumber();
+                            setSearchMenu("");
                           }}
                         >
                           Policy and Legal Framework
@@ -1491,6 +1871,7 @@ const Home = () => {
                             searchCategory("SPATIAL PLANNING");
                             setDisplay("results");
                             setToolNumber();
+                            setSearchMenu("");
                           }}
                         >
                           Spatial Planning
@@ -1500,6 +1881,7 @@ const Home = () => {
                             setDisplay("results");
                             searchCategory("MANAGEMENT PLANNING");
                             setToolNumber();
+                            setSearchMenu("");
                           }}
                         >
                           Management Planning
@@ -1509,6 +1891,7 @@ const Home = () => {
                             setDisplay("results");
                             searchCategory("PROTECTED AREA FINANCING");
                             setToolNumber();
+                            setSearchMenu("");
                           }}
                         >
                           Protected Area Financing{" "}
@@ -1518,6 +1901,7 @@ const Home = () => {
                             setDisplay("results");
                             searchCategory("CAPACITY DEVELOPMENT");
                             setToolNumber();
+                            setSearchMenu("");
                           }}
                         >
                           Capacity Development
@@ -1529,6 +1913,7 @@ const Home = () => {
                             );
                             setDisplay("results");
                             setToolNumber();
+                            setSearchMenu("");
                           }}
                         >
                           Assessment, Monitoring and Evaluation
@@ -1538,15 +1923,64 @@ const Home = () => {
                             setDisplay("results");
                             searchCategory("GOVERNANCE");
                             setToolNumber();
+                            setSearchMenu("");
                           }}
                         >
                           Governance
                         </li>
+                        {/* <li
+                          onClick={() => {
+                            setDisplay("reference");
+                            searchCategory("");
+                            setToolNumber();
+                          }}
+                        >
+                          References
+                        </li> */}
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-8 col-md-8">
+                  <StickyNav
+                    searchTerm={setSearchTerm}
+                    tNumber={setToolNumber}
+                    menuItem={setSearchMenu}
+                    setDisplay={setDisplay}
+                    setIsFromCategory={setIsFromCategory}
+                    setSearchTerm={setSearchTerm}
+                    setVisible={setVisible}
+                    setTitleHeading={setTitleHeading}
+                    children={[
+                      {
+                        "Good Governance": [
+                          "Conservation of values",
+                          "Ecosystem services",
+                          "Cultural values",
+                        ],
+                        "Sound Design and Planning": [
+                          "Identify site values",
+                          "Design site values",
+                          "Threats",
+                          "Economic",
+                        ],
+                        "Effective Management": [
+                          "Management strategy",
+                          "Ecological condition",
+                          "Social and economic",
+                          "Threats",
+                          "Laws and regulations",
+                          "Resources and tourism",
+                          "Measure Success",
+                        ],
+                        "Successful Conservation Outcomes": [
+                          "Conservation of values",
+                          "Ecosystem services",
+                          "Cultural values",
+                        ],
+                      },
+                    ]}
+                  />
                   <img
                     style={{
                       marginTop: "2rem",
@@ -1554,7 +1988,7 @@ const Home = () => {
                       height: "100px",
                       marginBottom: "-3rem",
                     }}
-                    src={forestAbstract}
+                    src="https://media.istockphoto.com/id/1434551630/vector/mountain-foggy-vector-landscape.jpg?s=612x612&w=0&k=20&c=CbYnQTe4HEynVnnNh6_cfrX934TncLSG4iPXa00SS9c="
                     alt=""
                   />
                   <div className="hero-content content-width ">
@@ -1562,7 +1996,7 @@ const Home = () => {
                       <div className="row">
                         <div className="col-md-8 ">
                           {" "}
-                          <h2>
+                          <h2 style={{ color: "#5ae6b8" }}>
                             Protected and Conserved Areas Management and
                             Governance
                           </h2>
@@ -1591,43 +2025,101 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="section-container pt-4">
+                    <div className="section-container pt-4 ">
                       <div className="row">
-                        <TitleCard
-                          onClick={() => {
-                            searchCategory("GOVERNANCE");
-                            setToolNumber();
-                          }}
-                          img={Picture1}
-                          title={
-                            <span>
-                              Good <br />
-                              Governance
-                            </span>
-                          }
-                        />
-                        <TitleCard
-                          img={Picture2}
-                          title={
-                            <span>
-                              Sound Design and <br />
-                              Planning
-                            </span>
-                          }
-                        />
-                        <TitleCard
-                          img={Picture3}
-                          title={
-                            <span>
-                              Effective <br />
-                              Management
-                            </span>
-                          }
-                        />
-                        <TitleCard
-                          img={Picture4}
-                          title={<span>Successful Conservation Outcomes</span>}
-                        />
+                        <div className="col-lg-3 col-md-3 col-sm-6 section-container">
+                          <DropDownComponent
+                          
+                            menuItem={setSearchMenu}
+                            setDisplay={setDisplay}
+                            setIsFromCategory={setIsFromCategory}
+                            setSearchTerm={setSearchTerm}
+                            setVisible={setVisible}
+                            img={Picture1}
+                            setTitleHeading={setTitleHeading}
+                            title={
+                              <span>
+                                Good <br />
+                                Governance
+                              </span>
+                            }
+                            menuItems={[
+                              "Legitimacy",
+                              "Transparency and accountability",
+                              "Governance",
+                            ]}
+                          />
+                        </div>
+                        <div className="col-lg-3 col-md-3 col-sm-6">
+                          <DropDownComponent
+                            menuItem={setSearchMenu}
+                            setDisplay={setDisplay}
+                            setIsFromCategory={setIsFromCategory}
+                            setSearchTerm={setSearchTerm}
+                            setVisible={setVisible}
+                            setTitleHeading={setTitleHeading}
+                            img={Picture2}
+                            title={
+                              <span>
+                                Sound Design and <br />
+                                Planning
+                              </span>
+                            }
+                            menuItems={[
+                              "Identify site values",
+                              "Design site values",
+                              "Threats",
+                              "Economic",
+                            ]}
+                          />
+                        </div>
+                        <div className="col-lg-3 col-md-3 col-sm-6">
+                          <DropDownComponent
+                            menuItem={setSearchMenu}
+                            setDisplay={setDisplay}
+                            setIsFromCategory={setIsFromCategory}
+                            setSearchTerm={setSearchTerm}
+                            setVisible={setVisible}
+                            setTitleHeading={setTitleHeading}
+                            img={Picture3}
+                            title={
+                              <span>
+                                Effective <br />
+                                Management
+                              </span>
+                            }
+                            menuItems={[
+                              "Management strategy",
+                              "Ecological condition",
+                              "Social and economic",
+                              "Threats",
+                              "Laws and regulations",
+                              "Resources and tourism",
+                              "Measure Success",
+                            ]}
+                          />
+                        </div>
+                        <div className="col-lg-3 col-md-3 col-sm-6">
+                          <DropDownComponent
+                            menuItem={setSearchMenu}
+                            setDisplay={setDisplay}
+                            setIsFromCategory={setIsFromCategory}
+                            setSearchTerm={setSearchTerm}
+                            setVisible={setVisible}
+                            setTitleHeading={setTitleHeading}
+                            img={Picture4}
+                            title={
+                              <span>
+                                Successful Conservation <br /> Outcomes
+                              </span>
+                            }
+                            menuItems={[
+                              "Conservation of values",
+                              "Ecosystem services",
+                              "Cultural values",
+                            ]}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>

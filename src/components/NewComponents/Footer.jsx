@@ -74,16 +74,23 @@ export default function SmallWithLogoLeft() {
       >
         <Logo />
         <Text mt="1rem" fontSize="small" textAlign="center">
-          © Copyright PCA Toolkit v.1.0.2024{" "}
+          © Copyright PCA Toolkit v.1.0.2024{" "} <br />
+           Powered By: AI Digital
         </Text>
         <Stack direction={"row"} spacing={6} color="white">
-          <SocialButton label={"Website"} href={"#"}>
+          <SocialButton
+            label={"Website"}
+            href={" https://www.asiaprotectedareaspartnership.org"}
+          >
             <FaGlobe />
           </SocialButton>
-          <SocialButton label={"Mail"} href={"#"}>
+          <SocialButton
+            label={"Mail"}
+            href={"mailto: info@asiaprotectedareaspartnership.org"}
+          >
             <FaEnvelope />
           </SocialButton>
-          <SocialButton label={"Phone"} href={"#"}>
+          <SocialButton label={"Phone"} href={"tel:+6626624029"}>
             <FaPhoneAlt />
           </SocialButton>
         </Stack>

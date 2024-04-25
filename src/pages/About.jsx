@@ -12,6 +12,8 @@ import {
 } from "@chakra-ui/react";
 import Footer from "../components/NewComponents/Footer";
 import logo from "../assets/pcalogo.png";
+import { AnimatePresence, motion } from "framer-motion";
+import { SplitText } from "../components/NewComponents/SplitText";
 const logoStyle = {
   boxShadow:
     "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
@@ -20,6 +22,18 @@ const logoStyle = {
   cursor: "pointer",
 };
 import { Link } from "react-router-dom";
+const defaultStyle = {
+  fontFamily: "sans-serif",
+  textAlign: "center",
+  fontSize: "30px",
+  fontWeight: "700",
+  letterSpacing: "1px",
+  lineHeight: "1.2",
+  textAlign: "center",
+  margin: "auto",
+  marginBottom: "-3rem",
+  color: "#fff",
+};
 export default function About() {
   return (
     <>
@@ -58,15 +72,32 @@ export default function About() {
                 spacing={{ md: 14 }}
                 // py={{ base: 20 }}
               >
-                <Heading
-                  fontWeight={600}
-                  fontSize={{ base: "2xl", sm: "4xl", md: "5xl" }}
-                  lineHeight={"110%"}
-                >
-                  <Text as={"span"} color={"green.400"}>
-                    About Toolkit
-                  </Text>
-                </Heading>
+            <div style={defaultStyle}>
+        <AnimatePresence>
+    
+            <motion.div
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <SplitText
+                initial={{ y: "100%" }}
+                animate="visible"
+                variants={{
+                  visible: (i) => ({
+                    color: "#5ae6b8",
+                    y: 0,
+                    transition: {
+                      delay: i * 0.4,
+                    },
+                  }),
+                }}
+              >
+                About Toolkit
+              </SplitText>
+            </motion.div>
+        </AnimatePresence>
+      </div>
                 <Text color={"white"} textAlign={"justify"} lineHeight={"180%"}>
                   Protected areas are one of the most important instruments of
                   worldwide conservation efforts. Vital for healthy and
@@ -99,7 +130,10 @@ export default function About() {
                   protected areas worldwide and to expand and increase efforts
                   in other key biodiversity areas and in areas that are
                   important for ecosystem services that are not legally
-                  protected.
+                  protected. <br /> <br />
+                  Project Lead: MKS Pasha/IUCN <br />
+                  <span >PCA Toolkit – version 1.0.2024</span>
+
                   {/* <Footer /> */}
                 </Text>
                 {/* <Stack

@@ -19,7 +19,8 @@ import Case4 from "./Case4";
 import Case5 from "./Case5";
 import Case6 from "./Case6";
 import Footer from "../../components/NewComponents/Footer";
-
+import { AnimatePresence, motion } from "framer-motion";
+import { SplitText } from "../../components/NewComponents/SplitText";
 const CaseHome = () => {
   const [caseStudy, setCaseStudy] = useState(1);
   const [isSpinner, setSpinner] = useState(false);
@@ -100,18 +101,47 @@ const CaseHome = () => {
     border: "3px solid #049ddb",
     cursor: "pointer",
   };
+
+  const defaultStyle = {
+    fontFamily: "sans-serif",
+    textAlign: "center",
+    fontSize: "30px",
+    fontWeight: "700",
+    letterSpacing: "1px",
+    lineHeight: "1.2",
+    textAlign: "center",
+    margin: "auto",
+    marginBottom: "-1.5rem",
+    color: "#fff",
+  };
+
   return (
     <>
-      <Heading
-        className="text-center"
-        fontWeight={600}
-        fontSize={{ base: "2xl", sm: "3xl", md: "5xl" }}
-        lineHeight={"100%"}
-      >
-        <Text as={"span"} color={"green.400"}>
-          Case Studies
-        </Text>
-      </Heading>
+      <div style={defaultStyle}>
+        <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <SplitText
+                initial={{ y: "100%" }}
+                animate="visible"
+                variants={{
+                  visible: (i) => ({
+                    color: "#5ae6b8",
+                    y: 0,
+                    transition: {
+                      delay: i * 0.4,
+                    },
+                  }),
+                }}
+              >
+              Case Studies
+              </SplitText>
+            </motion.div>
+        </AnimatePresence>
+      </div>
       {/* <div className="row" style={{ marginTop: "2em" }}>
         <div className="col-2">
           <button onClick={() => setCaseStudy(1)} className="caseButton">

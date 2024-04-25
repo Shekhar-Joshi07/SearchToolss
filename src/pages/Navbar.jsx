@@ -177,7 +177,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
           justify={"flex-end"}
           align={"center"}
-          flex={1}
+          flex={1} 
         >
           <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
@@ -206,6 +206,7 @@ const MobileNavItem = ({ label, children, href }) => {
   return (
     <Stack spacing={4} onClick={children && onToggle}>
       <Box
+        className="sticky-top"
         py={2}
         as="a"
         href={href ?? "#"}

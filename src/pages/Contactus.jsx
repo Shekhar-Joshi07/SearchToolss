@@ -1,14 +1,44 @@
-import { Heading, Icon, Text } from "@chakra-ui/react";
+import {
+  Heading,
+  Text,
+  Stack,
+  chakra,
+  VisuallyHidden,
+  Tooltip,
+} from "@chakra-ui/react";
+import { FaEnvelope, FaGlobe, FaPhoneAlt } from "react-icons/fa";
 import React from "react";
 import logo from "../assets/pcalogo.png";
 import { Link } from "react-router-dom";
+
 const Contactus = () => {
-  const logoStyle = {
-    boxShadow:
-      "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
-    borderRadius: "100px",
-    border: "3px solid #049ddb",
+  const SocialButton = ({ children, label, href, type, bgColor, target }) => {
+    return (
+      <Tooltip label={label} aria-label={label}>
+        <chakra.button
+          rounded={"full"}
+          w={8}
+          h={8}
+          cursor={"pointer"}
+          as={"a"}
+          href={href}
+          target={"_blank"}
+          type={type}
+          display={"inline-flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          transition={"background 0.3s ease"}
+          _hover={{
+            bg: bgColor,
+          }}
+          bg={bgColor}
+        >
+          {children}
+        </chakra.button>
+      </Tooltip>
+    );
   };
+
   return (
     <>
       <div className="container my-5">
@@ -17,67 +47,59 @@ const Contactus = () => {
             <Heading>Get in Touch</Heading>
           </div>
         </div>
-        <div className="row text-center mt-3">
-          <div className="col ">
-            <Text>How can we help you? We'd love to hear from you</Text>
-          </div>
-        </div>
-        <div style={{ width: "500px", margin: "auto" }} className="mt-5">
+
+        <div style={{ margin: "auto" }} className="mt-5">
           <div className="row text-center ">
-            <div className="col col-lg-6 ">
-              {/* <div className="card">
-            <div className="card card-body"> */}
+            <div className="col col-lg-7 ">
               <div className="row d-flex justify-content-center">
                 <div className="col ">
-                  <div
-                    style={{
-                      borderRadius: "50px",
-                      backgroundColor: "#0BB3BF",
-                      height: "30px",
-                    }}
-                    className="d-flex align-items-center justify-content-center"
-                  >
-                    <i class="fas fa-envelope"></i> &nbsp;&nbsp;forest@mail.com
+                  <div className="row mt-3">
+                    <div
+                      className="col"
+                      style={{ textAlign: "left", fontStyle: "italic" }}
+                    >
+                      <Text>
+                        Asia Protected Areas Partnership (APAP) Secretariat{" "}
+                        <br /> IUCN Asia Regional Office <br />
+                        63 Sukhumvit Soi 39 <br /> Wattana, Bangkok 10110 <br />
+                        Thailand <br />
+                        E-mail: <a style={{color:"#03bfff"}} href="mailto:info@asiaprotectedareaspartnership.org " target="_blank">info@asiaprotectedareaspartnership.org</a><br />
+                        Tel: <a style={{color:"#03bfff"}} href="tel:+662662 4029" target="_blank">+662662 4029</a> <br />
+                        Website: <a style={{color:"#03bfff"}} href=" https://www.asiaprotectedareaspartnership.org" target="_blank"> https://www.asiaprotectedareaspartnership.org</a>
+                      
+                      </Text>
+                    </div>
                   </div>
+                  <Stack direction={"row"} spacing={6} color="white">
+                    <SocialButton
+                      label={"https://www.asiaprotectedareaspartnership.org"}
+                      href={"https://www.asiaprotectedareaspartnership.org"}
+                      bgColor={"#0BB3BF"}
+                    >
+                      <FaGlobe />
+                    </SocialButton>
+                    <SocialButton
+                      label={"info@asiaprotectedareaspartnership.org"}
+                      href={"mailto: info@asiaprotectedareaspartnership.org"}
+                      bgColor={"#2CC27E"}
+                    >
+                      <FaEnvelope />
+                    </SocialButton>
+                    <SocialButton
+                      label={"+6626624029"}
+                      href={"tel:+6626624029"}
+                      bgColor={"#2C6AC2"}
+                    >
+                      <FaPhoneAlt />
+                    </SocialButton>
+                  </Stack>
                 </div>
               </div>
-
-              <div className="row d-flex justify-content-center mt-5">
-                <div className="col ">
-                  <div
-                    style={{
-                      borderRadius: "50px",
-                      backgroundColor: "#2CC27E",
-                      height: "30px",
-                    }}
-                    className="d-flex align-items-center justify-content-center"
-                  >
-                    <i class="fas fa-mobile"></i> &nbsp;&nbsp;+91 2823745552
-                  </div>
-                </div>
-              </div>
-              <div className="row d-flex justify-content-center mt-5">
-                <div className="col ">
-                  <div
-                    style={{
-                      borderRadius: "50px",
-                      backgroundColor: "#2C6AC2",
-                      height: "30px",
-                    }}
-                    className="d-flex align-items-center justify-content-center"
-                  >
-                    <i class="fas fa-globe"></i> &nbsp;&nbsp;www.forest.com
-                  </div>
-                </div>
-              </div>
-
-              {/* </div>
-          </div> */}
             </div>
-            <div className="col col-lg-6 d-flex align-items-center">
+            <div className="col col-lg-5  d-flex align-items-center">
               <div
                 className="sidebar-header mx-auto d-flex justify-content-center"
-                // style={{ height: "150px", width: "150px" }}
+                style={{ height: "300px", width: "300px" }}
               >
                 <Link to="/home">
                   <img
@@ -91,17 +113,6 @@ const Contactus = () => {
             </div>
           </div>
         </div>
-        {/* <div className="row d-flex justify-content-center align-items-center mt-5"  >
-                <div className="col col-lg-4 " >
-                <div className="sidebar-header d-flex d-flex justify-content-end">
-                      <img src={logo} alt="logo" height={50} width={100}/>
-                    </div>
-                   
-                </div>       
-                <div className='col col-lg-8 mt-2' style={{color:"#2d735c"}}>
-                <h6>Protected and Conserved Areas br Management and Governance</h6>
-                  </div>                       
-              </div> */}
       </div>
     </>
   );

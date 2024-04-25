@@ -3,7 +3,7 @@ import { Box, Text, Spinner } from "@chakra-ui/react";
 import Accordian from "./Accordian";
 import Tool6Content from "../assets/defaultToolData.json";
 
-const Tool6 = ({ searchTerm, tNumber, cl }) => {
+const Tool6 = ({ searchTerm, tNumber, cl, searchMenu }) => {
   const [isClicked, setClicked] = useState(false);
   const toolContent = Tool6Content[5];
 
@@ -38,7 +38,7 @@ const Tool6 = ({ searchTerm, tNumber, cl }) => {
       }, 0);
     };
 
-    if (searchTerm) {
+    if (searchTerm || searchMenu) {
       delayedSearch();
     } else {
       setSearchResult(null);

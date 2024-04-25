@@ -72,11 +72,10 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <BrowserRouter>
-
       <Routes>
+        {/* <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} /> */}
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-        {/* <Route path="/" element={<Home />} /> */}
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contactus />} />
@@ -136,7 +135,6 @@ const App = () => {
         <Route path="/tool54" element={<Tool54 logoDisplay={true}/>} />
         <Route path="/tool55" element={<Tool55 logoDisplay={true}/>} />
         <Route path="/tool56" element={<Tool56 logoDisplay={true}/>} />
-        {/* <Route path="/case1" element={<Case1 />} /> */}
 
         {/* Case Studies */}
         <Route path="/casestudies/index" element={<Index />} />

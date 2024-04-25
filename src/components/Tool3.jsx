@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Box, Text, Spinner } from "@chakra-ui/react";
 import Accordian from "./Accordian";
 
-const Tool3 = ({ searchTerm, tNumber, cl }) => {
+const Tool3 = ({ searchTerm, tNumber, cl, searchMenu }) => {
   const [isClicked, setClicked] = useState(false);
   const toolContent = useMemo(
     () => ({
@@ -60,7 +60,7 @@ const Tool3 = ({ searchTerm, tNumber, cl }) => {
       }, 0);
     };
 
-    if (searchTerm) {
+    if (searchTerm || searchMenu) {
       delayedSearch();
     } else {
       setSearchResult(null);

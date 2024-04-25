@@ -7,14 +7,12 @@ import logo from "../../assets/pcalogo.png";
 const Tooll1 = (props) => {
   return (
     <>
-      
-
       <header className="container">
         <div className="row my-2">
           <div className="col mt-2 col-lg-2 d-flex justify-content-start">
             <div className="" style={{ height: "80px", width: "150px" }}>
               <Link to="/home">
-                {!props.logoDisplay ? <></> :<img src={logo} alt="logo" />}
+                {!props.logoDisplay ? <></> : <img src={logo} alt="logo" />}
               </Link>
             </div>
           </div>
@@ -23,7 +21,7 @@ const Tooll1 = (props) => {
               className="d-flex justify-content-start"
               style={{ marginTop: "25px" }}
             >
-              <h4>Category 3.1 - POLICY AND LEGAL FRAMEWORK</h4>
+              <h3>Category 3.1 - POLICY AND LEGAL FRAMEWORK</h3>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 [ 
   {
+    
     "category": "POLICY AND LEGAL FRAMEWORK",
     "headingText": "Tool 1: Ecolex the gateway to environmental law",
     "type": "A set of online databases",
@@ -840,6 +841,7 @@
     "route":"49"
   },
   {
+    "menu": "Legitimacy",
     "category" :"GOVERNANCE",
     "headingText":"TOOL 50 :FREE, PRIOR AND INFORMED CONSENT (FPIC)",
     "type":"Standard, principle and process",
