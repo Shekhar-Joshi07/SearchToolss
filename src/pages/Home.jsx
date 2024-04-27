@@ -144,6 +144,7 @@ import Referrences from "../components/References";
 import { ImFilePdf } from "react-icons/im";
 import { Dropdown } from "react-bootstrap";
 import DropDownComponent from "../components/NewComponents/DropdownComponent";
+import { FaSearch } from "react-icons/fa";
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchTermCategory, setSearchTermCategory] = useState("");
@@ -151,22 +152,12 @@ const Home = () => {
   const [showLoader, setShowLoader] = useState(false);
   const [isFromCategory, setIsFromCategory] = useState(false);
 
-  const [toolNumber, setToolNumber] = useState(); //** */
+  const [toolNumber, setToolNumber] = useState();
   const [isClicked, setClicked] = useState(false);
   let [visible, setVisible] = useState(false);
   const [displayDiv, setDisplay] = useState("");
   const [searchMenu, setSearchMenu] = useState("");
   const [titleHeading, setTitleHeading] = useState("");
-
-  const [showDropdown, setShowDropdown] = useState(false);
-
-  const handleMouseEnter = () => {
-    setShowDropdown(true);
-  };
-
-  const handleMouseLeave = () => {
-    setShowDropdown(false);
-  };
 
   const displayData = (div) => {
     switch (div) {
@@ -822,6 +813,9 @@ const Home = () => {
   const handleSearch = () => {
     setSearchTerm((prev) => (prev = searchInput));
     setIsFromCategory(false);
+    setSearchMenu("");
+    setTitleHeading("");
+    setClicked(false)
     setDisplay("results");
     setToolNumber();
     console.log("searching");
@@ -1290,15 +1284,67 @@ const Home = () => {
         />
       );
       const resultHeading = (
-        <Box textAlign="start" mt="-3" mb="4">
-          <span>Showing results for </span> &nbsp;
-          <span
-            style={{
-              fontWeight: "600",
-              color: "#5ae6b8",
-            }}
-          >{`${searchTerm}`}</span>
+        <Box
+          textAlign="start"
+          mt="-3"
+          mb="4"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <span>Showing results for </span> &nbsp;
+            <span
+              style={{
+                fontWeight: "600",
+                color: "#5ae6b8",
+              }}
+            >{`${searchTerm}`}</span>
+          </div>
+          {isClicked && (
+            <button
+              className="btn backBtn"
+              style={{ textAlign: "end" }}
+              onClick={() => {
+                setToolNumber();
+                setClicked(false);
+              }}
+            >
+              Back
+            </button>
+          )}
         </Box>
+        //   <Box
+        //   textAlign="start"
+        //   mt="-3"
+        //   mb="4"
+        //   style={{
+        //     display: "flex",
+        //     justifyContent: "space-between",
+        //     alignItems: "center",
+        //   }}
+        // >
+        //   <div>
+        //     <span>Showing results from</span>&nbsp;
+        //     <span style={{ fontWeight: "600", color: "#5ae6b8" }}>
+        //       {searchTerm}
+        //     </span>
+        //   </div>
+        //   {isClicked && (
+        //     <button
+        //       className="btn backBtn"
+        //       style={{ textAlign: "end" }}
+        //       onClick={() => {
+        //         setToolNumber();
+        //         setClicked(false);
+        //       }}
+        //     >
+        //       Back
+        //     </button>
+        //   )}
+        // </Box>
       );
 
       // const noResultFound = <Box textAlign="start" mt="-3" mb= "4">
@@ -1442,7 +1488,7 @@ const Home = () => {
         }
       };
 
-      const tool2 = [tool1Result, tool2Result];
+      // const tool2 = [tool1Result, tool2Result];
 
       const toolList = [
         tool1Result,
@@ -1515,7 +1561,7 @@ const Home = () => {
       const SearchResults = () => {
         return (
           <>
-            {resultHeading}
+            {/* {resultHeading} */}
             <h5>Tools result</h5>
             {toolList.map((tool) => {
               return tool;
@@ -1524,7 +1570,6 @@ const Home = () => {
             <hr />
             <h5>Case studies result</h5>
             {caseList.map((c) => {
-              // console.log(c);
               return c;
             })}
           </>
@@ -1535,10 +1580,14 @@ const Home = () => {
         <>
           {isClicked ? (
             <>
+              {resultHeading}
               <DisplaySearches />
             </>
           ) : (
-            <SearchResults />
+            <>
+              {resultHeading}
+              <SearchResults />
+            </>
           )}
         </>
       );
@@ -1771,7 +1820,7 @@ const Home = () => {
                   className="btn backBtn"
                   style={{ textAlign: "end" }}
                   onClick={() => {
-                    setToolNumber("undefined");
+                    setToolNumber();
                     setClicked(false);
                   }}
                 >
@@ -1806,7 +1855,7 @@ const Home = () => {
                   className="btn backBtn"
                   style={{ textAlign: "end" }}
                   onClick={() => {
-                    setToolNumber("undefined");
+                    setToolNumber();
                     setClicked(false);
                   }}
                 >
@@ -1861,6 +1910,7 @@ const Home = () => {
                             setDisplay("results");
                             searchCategory("POLICY AND LEGAL FRAMEWORK");
                             setToolNumber();
+                            setClicked(false);
                             setSearchMenu("");
                           }}
                         >
@@ -1871,6 +1921,7 @@ const Home = () => {
                             searchCategory("SPATIAL PLANNING");
                             setDisplay("results");
                             setToolNumber();
+                            setClicked(false);
                             setSearchMenu("");
                           }}
                         >
@@ -1881,6 +1932,7 @@ const Home = () => {
                             setDisplay("results");
                             searchCategory("MANAGEMENT PLANNING");
                             setToolNumber();
+                            setClicked(false);
                             setSearchMenu("");
                           }}
                         >
@@ -1891,6 +1943,7 @@ const Home = () => {
                             setDisplay("results");
                             searchCategory("PROTECTED AREA FINANCING");
                             setToolNumber();
+                            setClicked(false);
                             setSearchMenu("");
                           }}
                         >
@@ -1901,6 +1954,7 @@ const Home = () => {
                             setDisplay("results");
                             searchCategory("CAPACITY DEVELOPMENT");
                             setToolNumber();
+                            setClicked(false);
                             setSearchMenu("");
                           }}
                         >
@@ -1913,6 +1967,7 @@ const Home = () => {
                             );
                             setDisplay("results");
                             setToolNumber();
+                            setClicked(false);
                             setSearchMenu("");
                           }}
                         >
@@ -1923,6 +1978,7 @@ const Home = () => {
                             setDisplay("results");
                             searchCategory("GOVERNANCE");
                             setToolNumber();
+                            setClicked(false);
                             setSearchMenu("");
                           }}
                         >
@@ -2003,7 +2059,10 @@ const Home = () => {
                         </div>
                         <div className="col-md-4">
                           <div className="search_input_here pt-2">
-                            <div className="form-input">
+                            <div
+                              className="form-input"
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
                               <input
                                 type="text"
                                 className="form-control"
@@ -2011,15 +2070,13 @@ const Home = () => {
                                 value={searchInput}
                                 onChange={(e) => setSearchInput(e.target.value)}
                                 onKeyUp={(e) => {
-                                  if (e.key === "Enter") return handleSearch();
+                                  if (e.key === "Enter") handleSearch();
                                 }}
                               />
-                              <button>
-                                <i
-                                  onClick={handleSearch}
-                                  className="fa fa-search text-light"
-                                ></i>
-                              </button>
+                              <FaSearch
+                                className=" mx-2"
+                                onClick={handleSearch}
+                              />{" "}
                             </div>
                           </div>
                         </div>
@@ -2029,13 +2086,14 @@ const Home = () => {
                       <div className="row">
                         <div className="col-lg-3 col-md-3 col-sm-6 section-container">
                           <DropDownComponent
-                          
+                            setClicked={setClicked}
                             menuItem={setSearchMenu}
                             setDisplay={setDisplay}
                             setIsFromCategory={setIsFromCategory}
                             setSearchTerm={setSearchTerm}
                             setVisible={setVisible}
                             img={Picture1}
+                            setToolNumber={setToolNumber}
                             setTitleHeading={setTitleHeading}
                             title={
                               <span>
@@ -2052,11 +2110,13 @@ const Home = () => {
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-6">
                           <DropDownComponent
+                            setClicked={setClicked}
                             menuItem={setSearchMenu}
                             setDisplay={setDisplay}
                             setIsFromCategory={setIsFromCategory}
                             setSearchTerm={setSearchTerm}
                             setVisible={setVisible}
+                            setToolNumber={setToolNumber}
                             setTitleHeading={setTitleHeading}
                             img={Picture2}
                             title={
@@ -2077,10 +2137,12 @@ const Home = () => {
                           <DropDownComponent
                             menuItem={setSearchMenu}
                             setDisplay={setDisplay}
+                            setClicked={setClicked}
                             setIsFromCategory={setIsFromCategory}
                             setSearchTerm={setSearchTerm}
                             setVisible={setVisible}
                             setTitleHeading={setTitleHeading}
+                            setToolNumber={setToolNumber}
                             img={Picture3}
                             title={
                               <span>
@@ -2103,9 +2165,11 @@ const Home = () => {
                           <DropDownComponent
                             menuItem={setSearchMenu}
                             setDisplay={setDisplay}
+                            setClicked={setClicked}
                             setIsFromCategory={setIsFromCategory}
                             setSearchTerm={setSearchTerm}
                             setVisible={setVisible}
+                            setToolNumber={setToolNumber}
                             setTitleHeading={setTitleHeading}
                             img={Picture4}
                             title={

@@ -17,6 +17,7 @@ const DropDownComponent = (props) => {
   return (
     <>
       <div
+
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         className="w-auto menuHovered"
@@ -26,6 +27,8 @@ const DropDownComponent = (props) => {
           className="w-100"
           show={showDropdown}
           onClick={() => {
+            props.setToolNumber();
+            props.setClicked(false)
             props.setIsFromCategory(true);
             props.setDisplay("results");
             props.setSearchTerm("");
@@ -62,6 +65,8 @@ const DropDownComponent = (props) => {
               <li
                 className=""
                 onClick={(event) => {
+                  props.setToolNumber();
+                  props.setClicked(false)
                   props.setIsFromCategory(true);
                   props.setSearchTerm("");
                   props.setTitleHeading("");
